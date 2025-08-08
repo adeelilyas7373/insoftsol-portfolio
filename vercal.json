@@ -1,39 +1,8 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "vite.config.js",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist",
-        "cleanUrls": true
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/assets/(.*)",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      },
-      "continue": true
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1",
-      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-    }
-  ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "headers": [
     {
       "source": "/(.*)",
-      "headers": [
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
-      ]
+      "destination": "/"
     }
   ]
 }
