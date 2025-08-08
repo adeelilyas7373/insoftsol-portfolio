@@ -22,11 +22,6 @@
       "src": "/api/(.*)",
       "dest": "/api/$1",
       "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html",
-      "status": 200
     }
   ],
   "rewrites": [
@@ -36,14 +31,8 @@
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        }
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
       ]
     }
   ]
