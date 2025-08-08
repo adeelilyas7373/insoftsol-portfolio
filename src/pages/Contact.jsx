@@ -43,11 +43,14 @@ const Contact = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5001/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://portfolio-backend-three-pi.vercel.app/api/contact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to send");
 
