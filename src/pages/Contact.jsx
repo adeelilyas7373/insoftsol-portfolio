@@ -30,17 +30,14 @@ const Contact = () => {
     });
   }, []);
 
-  // Form submission
+  // Form submission (REPLACED CODE)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSending(true);
 
-    const formData = {
-      name: e.target.name.value,
-      email: e.target.email.value,
-      subject: e.target.subject.value,
-      message: e.target.message.value,
-    };
+    // Use FormData for more flexibility (e.g., file uploads in future)
+    const formDataObj = new FormData(e.target);
+    const formData = Object.fromEntries(formDataObj.entries());
 
     try {
       const response = await fetch(
