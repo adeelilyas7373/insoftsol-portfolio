@@ -1,30 +1,193 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
+import styled from "styled-components";
 import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 
+// Remove most animations, keep it simple
+
+const PageContainer = styled.div`
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f9fafb 100%);
+  padding: 4rem 0 2rem 0;
+`;
+
+const Container = styled.div`
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1.2rem;
+`;
+
+const SectionTitle = styled.h1`
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(90deg, #2563eb 0%, #4f46e5 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+`;
+
+const Grid = styled.div`
+  display: grid;
+  gap: 3rem;
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+`;
+
+const Card = styled.div`
+  background: ${({ blue }) =>
+    blue
+      ? "#fff" // Contact form ka background ab safed hai
+      : "linear-gradient(135deg, #fff 0%, #f3f4f6 100%)"};
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 41, 55, 0.08);
+  padding: 2.5rem 2rem;
+`;
+
+const CardContent = styled.div`
+  opacity: 1;
+`;
+
+const CardTitle = styled.h2`
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(90deg, #2563eb 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+`;
+
+const CardText = styled.p`
+  color: #334155;
+  margin-bottom: 1.5rem;
+  font-size: 1.08rem;
+  line-height: 1.6;
+`;
+
+const ContactList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+`;
+
+const ContactItemRow = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+`;
+
+const ContactIcon = styled.div`
+  background: linear-gradient(135deg, #dbeafe 0%, #a5b4fc 100%);
+  color: #2563eb;
+  border-radius: 9999px;
+  padding: 0.7rem;
+  margin-top: 0.1rem;
+  box-shadow: 0 2px 8px 0 rgba(59, 130, 246, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ContactInfo = styled.div`
+  h3 {
+    font-weight: 600;
+    color: #3730a3;
+    margin-bottom: 0.1rem;
+    font-size: 1.05rem;
+  }
+  p {
+    color: #334155;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+`;
+
+const StatusMessage = styled.div`
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  background: ${({ success }) =>
+    success
+      ? "linear-gradient(90deg, #bbf7d0 0%, #f0fdf4 100%)"
+      : "linear-gradient(90deg, #fee2e2 0%, #fef2f2 100%)"};
+  color: ${({ success }) => (success ? "#166534" : "#b91c1c")};
+  border: 1px solid ${({ success }) => (success ? "#86efac" : "#fecaca")};
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+`;
+
+const Label = styled.label`
+  color: #3730a3;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  display: block;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 0.6rem;
+  border: 1.5px solid #c7d2fe;
+  background: #fff;
+  font-size: 1rem;
+  transition: border 0.2s;
+  &:focus {
+    outline: none;
+    border-color: #6366f1;
+    background: #f0f9ff;
+  }
+`;
+
+const Textarea = styled.textarea`
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 0.6rem;
+  border: 1.5px solid #c7d2fe;
+  background: #fff;
+  font-size: 1rem;
+  min-height: 110px;
+  resize: vertical;
+  transition: border 0.2s;
+  &:focus {
+    outline: none;
+    border-color: #6366f1;
+    background: #f0f9ff;
+  }
+`;
+
+const SubmitButton = styled.button`
+  background: linear-gradient(90deg, #2563eb 0%, #9333ea 60%, #06b6d4 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.08rem;
+  padding: 0.85rem 2.2rem;
+  border-radius: 9999px;
+  border: none;
+  box-shadow: 0 8px 24px -8px rgba(59, 130, 246, 0.13);
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.23, 1, 0.32, 1);
+  opacity: ${({ disabled }) => (disabled ? 0.7 : 1)};
+  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+  &:hover {
+    background: linear-gradient(90deg, #2563eb 0%, #4f46e5 60%, #06b6d4 100%);
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 12px 32px -8px rgba(59, 130, 246, 0.18);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+`;
+
 const Contact = () => {
-  const leftColRef = useRef(null);
-  const rightColRef = useRef(null);
   const [isSending, setIsSending] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-
-  useEffect(() => {
-    const animateElements = [
-      { ref: leftColRef, delay: 100, direction: "-40px" },
-      { ref: rightColRef, delay: 250, direction: "40px" },
-    ];
-
-    animateElements.forEach(({ ref, delay, direction }) => {
-      const element = ref.current;
-      if (element) {
-        element.classList.add("opacity-0", `translate-x-[${direction}]`);
-        setTimeout(() => {
-          element.classList.add("transition-all", "duration-700", "ease-out");
-          element.classList.remove("opacity-0", `translate-x-[${direction}]`);
-          element.classList.add("opacity-100", "translate-x-0");
-        }, delay);
-      }
-    });
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,73 +235,69 @@ const Contact = () => {
   };
 
   return (
-    <div className="py-16 min-h-screen bg-gradient-to-br from-blue-50 to-gray-50">
-      <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-            Contact Us
-          </h1>
-
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Left Column */}
-            <div
-              ref={leftColRef}
-              className="bg-white rounded-2xl p-8 shadow-lg opacity-0 translate-x-[-40px]"
-            >
-              <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                Get in Touch
-              </h2>
-              <p className="text-slate-700 mb-6">
+    <PageContainer>
+      <Container>
+        <SectionTitle>Contact Us</SectionTitle>
+        <Grid>
+          {/* Left Column */}
+          <Card>
+            <CardContent>
+              <CardTitle>Get in Touch</CardTitle>
+              <CardText>
                 Have a project in mind or want to learn more about our services?
                 Reach out to us using the information below or fill out the
                 form.
-              </p>
-
-              <div className="space-y-4">
+              </CardText>
+              <ContactList>
                 <ContactItem
-                  icon={<FiMail className="text-blue-600 text-xl" />}
+                  icon={<FiMail size={22} />}
                   title="Email"
-                  content="usman@mountsol.com"
+                  content="haseeb@logicsbay.com"
                 />
                 <ContactItem
-                  icon={<FiPhone className="text-blue-600 text-xl" />}
+                  icon={<FiPhone size={22} />}
                   title="Phone"
-                  content="+92 341 4891548"
+                  content="+92 314 4366017"
                 />
                 <ContactItem
-                  icon={<FiMapPin className="text-blue-600 text-xl" />}
+                  icon={<FiMapPin size={22} />}
                   title="Address"
                   content={
-                    <>
-                      Plot 35, Aibak Block Garden Town,
+                    <a
+                      href="https://maps.app.goo.gl/V8F6w6vZXdjRAdti6"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        color: "#334155",
+                        textDecoration: "none",
+                        transition: "color 0.18s",
+                      }}
+                      onMouseOver={(e) =>
+                        (e.currentTarget.style.color = "black")
+                      }
+                      onMouseOut={(e) =>
+                        (e.currentTarget.style.color = "#334155")
+                      }
+                    >
+                      765-C, Street 16, Block C Faisal Town,
                       <br />
-                      Lahore, Punjab 54000
-                    </>
+                      Lahore-54700 Punjab PAKISTAN
+                    </a>
                   }
                 />
-              </div>
-            </div>
-
-            {/* Right Column */}
-            <div
-              ref={rightColRef}
-              className="bg-blue-50 rounded-2xl p-8 shadow-lg opacity-0 translate-x-[40px]"
-            >
-              <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                Send Us a Message
-              </h2>
+              </ContactList>
+            </CardContent>
+          </Card>
+          {/* Right Column */}
+          <Card blue>
+            <CardContent>
+              <CardTitle>Send Us a Message</CardTitle>
               {submitStatus && (
-                <div
-                  className={`p-4 mb-6 rounded-lg ${
-                    submitStatus.success
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
-                  }`}
-                >
+                <StatusMessage success={submitStatus.success}>
                   {submitStatus.message}
-                </div>
+                </StatusMessage>
               )}
-              <form className="space-y-4" onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit} autoComplete="off">
                 <FormField
                   label="Name"
                   id="name"
@@ -167,59 +326,48 @@ const Contact = () => {
                   placeholder="Your message"
                   required
                 />
-                <button
-                  type="submit"
-                  disabled={isSending}
-                  className={`bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-700 hover:to-cyan-600 transition-all shadow-md ${
-                    isSending ? "opacity-70 cursor-not-allowed" : ""
-                  }`}
-                >
+                <SubmitButton type="submit" disabled={isSending}>
                   {isSending ? "Sending..." : "Send Message"}
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+                </SubmitButton>
+              </Form>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Container>
+    </PageContainer>
   );
 };
 
 // Reusable Components
 const ContactItem = ({ icon, title, content }) => (
-  <div className="flex items-start gap-4">
-    <div className="bg-blue-100 text-blue-600 rounded-full p-2 mt-1 shadow-sm">
-      {icon}
-    </div>
-    <div>
-      <h3 className="font-semibold text-blue-700">{title}</h3>
-      <p className="text-slate-700">{content}</p>
-    </div>
-  </div>
+  <ContactItemRow>
+    <ContactIcon>{icon}</ContactIcon>
+    <ContactInfo>
+      <h3>{title}</h3>
+      <p>{content}</p>
+    </ContactInfo>
+  </ContactItemRow>
 );
 
 const FormField = ({ label, id, type, placeholder, required }) => (
   <div>
-    <label htmlFor={id} className="block text-blue-700 mb-2 font-medium">
-      {label}
-    </label>
+    <Label htmlFor={id}>{label}</Label>
     {type === "textarea" ? (
-      <textarea
+      <Textarea
         id={id}
         name={id}
         rows="4"
-        className="w-full px-4 py-2 border border-blue-200 rounded focus:outline-none focus:border-blue-500 bg-white"
         placeholder={placeholder}
         required={required}
       />
     ) : (
-      <input
+      <Input
         type={type}
         id={id}
         name={id}
-        className="w-full px-4 py-2 border border-blue-200 rounded focus:outline-none focus:border-blue-500 bg-white"
         placeholder={placeholder}
         required={required}
+        autoComplete="off"
       />
     )}
   </div>

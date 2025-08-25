@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import logo from "/logo.png";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -10,79 +11,117 @@ const navLinks = [
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   return (
-    <header className="bg-gradient-to-r from-blue-700 via-blue-500 to-cyan-400 shadow-lg relative z-50">
+    <header className="sticky top-0 bg-white/95 backdrop-blur-sm border-b p-1.5 border-gray-100 shadow-sm z-50">
       <style>
         {`
           .header-fade-in {
-            animation: headerFadeIn 1s cubic-bezier(0.23, 1, 0.32, 1) both;
+            animation: headerFadeIn 0.55s cubic-bezier(0.23, 1, 0.32, 1) both;
           }
           @keyframes headerFadeIn {
-            0% { opacity: 0; transform: translateY(-30px);}
+            0% { opacity: 0; transform: translateY(-18px);}
             100% { opacity: 1; transform: translateY(0);}
           }
           .nav-link-anim {
-            transition: color 0.2s, background 0.2s, box-shadow 0.2s, transform 0.2s;
+            transition: color 0.18s, transform 0.18s;
             position: relative;
+            font-weight: 500;
+            letter-spacing: 0.01em;
           }
           .nav-link-anim::after {
             content: '';
             display: block;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #38bdf8 0%, #2563eb 100%);
-            transition: width 0.3s;
+            background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
+            transition: width 0.22s;
             position: absolute;
-            left: 0;
-            bottom: -2px;
+            left: 50%;
+            bottom: -5px;
+            transform: translateX(-50%);
+            border-radius: 2px;
           }
-          /* Remove background change from nav-link-anim hover */
-          .nav-link-anim:hover {
-            color: #fff !important;
-            /* background removed */
-            box-shadow: 0 2px 12px rgba(56,189,248,0.10);
-            transform: translateY(-2px) scale(1.05);
+          .nav-link-anim:hover,
+          .nav-link-anim.active {
+            color: #2563eb !important;
+            transform: translateY(-1px) scale(1.04);
           }
-          .nav-link-anim:hover::after {
+          .nav-link-anim:hover::after,
+          .nav-link-anim.active::after {
             width: 100%;
           }
-          /* Add background change on button hover */
-          .menu-btn-anim:hover {
-            background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%) !important;
+          .logo-text {
+            background: linear-gradient(135deg, #2563eb 0%, #38bdf8 50%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          }
+          .menu-btn {
+            background: transparent;
+            border: 1px solid #e5e7eb;
+            transition: all 0.18s;
+          }
+          .menu-btn:hover {
+            background: #f3f4f6;
+            border-color: #d1d5db;
           }
         `}
       </style>
-      <div className="container mx-auto px-6 py-4 header-fade-in">
+
+      {/* Container */}
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 header-fade-in">
         <div className="flex items-center justify-between">
+          {/* Logo */}
           <Link
             to="/"
-            className="text-3xl font-extrabold bg-gradient-to-r from-cyan-200 via-white to-blue-200 bg-clip-text text-transparent tracking-tight drop-shadow-lg transition-all duration-300"
-            style={{ letterSpacing: "0.04em" }}
+            className="flex items-center gap-2"
+            style={{ textDecoration: "none" }}
           >
-            MountSol
+            <img
+              src={logo}
+              alt="Logics Bay"
+              className="w-9 h-9 object-contain"
+              style={{ minWidth: "2.25rem" }}
+            />
+            <span className="logo-text text-[1.35rem] font-bold tracking-tight select-none">
+              Logics Bay
+            </span>
           </Link>
-          <nav className="hidden md:flex space-x-8 ml-8">
-            {navLinks.map((link, idx) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`nav-link-anim px-3 py-1 rounded-md text-lg font-medium text-white/90 hover:text-white transition-all duration-200`}
-                style={{
-                  animation: `headerFadeIn 0.7s ${0.1 + idx * 0.08}s both`,
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-2">
+            {navLinks.map((link, idx) => {
+              const isActive =
+                link.to === "/"
+                  ? location.pathname === "/"
+                  : location.pathname.startsWith(link.to);
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`nav-link-anim px-3 py-2 text-[0.97rem] text-gray-700 hover:text-blue-600${
+                    isActive ? " active" : ""
+                  }`}
+                  style={{
+                    animation: `headerFadeIn 0.5s ${0.08 + idx * 0.07}s both`,
+                  }}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
+
+          {/* Mobile menu button */}
           <button
-            className="md:hidden focus:outline-none p-2 rounded transition menu-btn-anim"
+            className="md:hidden menu-btn p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label="Open menu"
+            aria-label="Toggle menu"
           >
             <svg
-              className="w-7 h-7 text-white"
+              className="w-6 h-6 text-gray-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -94,28 +133,48 @@ const Header = () => {
                 d={
                   menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"
                 }
-              ></path>
+              />
             </svg>
           </button>
         </div>
+
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden mt-4 bg-gradient-to-br from-blue-700 via-blue-500 to-cyan-400 rounded-lg shadow-lg p-4 animate-fade-in-up">
-            <nav className="flex flex-col space-y-3">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className="nav-link-anim px-3 py-2 rounded-md text-lg font-semibold text-white/90 hover:text-white transition-all duration-200"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
+          <div className="md:hidden mt-2.5 bg-white border border-gray-100 rounded-xl shadow-lg animate-fadeIn">
+            <nav className="flex flex-col py-1.5">
+              {navLinks.map((link) => {
+                const isActive =
+                  link.to === "/"
+                    ? location.pathname === "/"
+                    : location.pathname.startsWith(link.to);
+                return (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    className={`nav-link-anim px-4 py-3 text-[0.97rem] text-gray-700 hover:text-blue-600 hover:bg-gray-50${
+                      isActive ? " active" : ""
+                    }`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
         )}
       </div>
+      <style>
+        {`
+          @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-10px);}
+            100% { opacity: 1; transform: translateY(0);}
+          }
+          .animate-fadeIn {
+            animation: fadeIn 0.32s cubic-bezier(0.23, 1, 0.32, 1) both;
+          }
+        `}
+      </style>
     </header>
   );
 };

@@ -1,4 +1,5 @@
 export const industries = [
+  // 1. Healthcare
   {
     id: "healthcare",
     name: "Healthcare Solutions",
@@ -11,6 +12,7 @@ export const industries = [
         description:
           "A home care application designed to bridge the gap between patients and local home health agencies with an insurance-based matching system.",
         techStack: ["ReactJS", "NodeJS", "ExpressJS", "MySQL"],
+        image: "/images/CareSnap.png",
       },
       {
         name: "PrognosUS",
@@ -18,6 +20,7 @@ export const industries = [
         description:
           "Healthcare platform focusing on advanced data analytics and reporting capabilities to enhance patient outcomes and operational efficiency.",
         techStack: ["React Native", "Redux", "Tailwind CSS", "GraphQL"],
+        image: "/images/PrognosUS.png",
       },
       {
         name: "Ucardia",
@@ -25,9 +28,12 @@ export const industries = [
         description:
           "Specialized cardiac care application offering video consultation services, remote monitoring, and hospital management integration.",
         techStack: ["ReactJS", "NodeJS", "ExpressJS", "MySQL"],
+        image: "/images/Ucardia.png",
       },
     ],
   },
+
+  // 2. Restaurant Management
   {
     id: "restaurant",
     name: "Restaurant Management",
@@ -46,9 +52,12 @@ export const industries = [
           "Material UI",
           "API Integration",
         ],
+        image: "/images/RamenSan.png",
       },
     ],
   },
+
+  // 3. Logistics
   {
     id: "logistics",
     name: "Logistics Solutions",
@@ -61,9 +70,12 @@ export const industries = [
         description:
           "Complete logistics management system handling picking, packing, dispatching, and inventory management.",
         techStack: ["Angular 7", "Node.js/PHP", "MySQL", "Bootstrap"],
+        image: "/images/DakiaCourierServices.png",
       },
     ],
   },
+
+  // 4. Financial Technology
   {
     id: "finance",
     name: "Financial Technology",
@@ -76,9 +88,12 @@ export const industries = [
         description:
           "Fintech platform designed to streamline tax credit claims for startups and small businesses.",
         techStack: ["Angular", "NodeJS", "Figma", "Bootstrap"],
+        image: "/images/TaxTaker.png",
       },
     ],
   },
+
+  // 5. E-commerce
   {
     id: "ecommerce",
     name: "E-commerce Platforms",
@@ -87,7 +102,7 @@ export const industries = [
     projects: [
       {
         name: "Ajwa Garments",
-        website: "https://ajwagarments.com",
+        // website: "https://ajwagarments.com",
         description:
           "E-commerce platform offering high-quality garments with secure checkout and admin management.",
         techStack: [
@@ -96,6 +111,7 @@ export const industries = [
           "Sequelize (PostgreSQL)",
           "React Bootstrap",
         ],
+        image: "/images/AjwaGarments.png",
       },
       {
         name: "Staples Canada",
@@ -103,9 +119,12 @@ export const industries = [
         description:
           "Comprehensive online retail platform offering office supplies and business solutions.",
         techStack: ["Shopify"],
+        image: "/images/StaplesCanada.png",
       },
     ],
   },
+
+  // 6. Educational Management
   {
     id: "education",
     name: "Educational Management",
@@ -123,15 +142,19 @@ export const industries = [
           "jQuery",
           "Data Access Framework",
         ],
+        image: "/images/SchoolManagementSystem.png",
       },
       {
         name: "School Finder Mobile Application",
         description:
           "Mobile app simplifying school selection by providing comprehensive guidance to nearby institutions.",
         techStack: ["React Native", "Firebase"],
+        image: "/images/SchoolFinderMobileApplication.png",
       },
     ],
   },
+
+  // 7. Multi-Service Platforms
   {
     id: "multiservice",
     name: "Multi-Service Platforms",
@@ -151,12 +174,14 @@ export const industries = [
           "React Bootstrap",
           "React Material UI",
         ],
+        image: "/images/TenantManagementSystem.avif",
       },
       {
         name: "Hexa-Hive Event Management Platform",
         description:
           "AI-powered platform simplifying event scheduling, customization, and reminder systems.",
         techStack: ["Node.js", "MongoDB", "Amazon Web Services (AWS)"],
+        image: "/images/HexaHiveEventManagement.jpg",
       },
       {
         name: "Grocery Delivery Application",
@@ -164,6 +189,7 @@ export const industries = [
         description:
           "Comprehensive online grocery shopping and delivery services.",
         techStack: ["React Native", "Node.js", "MongoDB"],
+        image: "/images/GroceryDeliveryApplication.png",
       },
     ],
   },
