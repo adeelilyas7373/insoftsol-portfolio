@@ -102,7 +102,6 @@ export const industries = [
     projects: [
       {
         name: "Ajwa Garments",
-        // website: "https://ajwagarments.com",
         description:
           "E-commerce platform offering high-quality garments with secure checkout and admin management.",
         techStack: [
@@ -120,6 +119,19 @@ export const industries = [
           "Comprehensive online retail platform offering office supplies and business solutions.",
         techStack: ["Shopify"],
         image: "/images/StaplesCanada.png",
+      },
+      {
+        name: "MRZZM",
+        website: "https://mrzzm.com/",
+        description:
+          "Online e-commerce platform for digital art products with customer, vendor, and admin portals.",
+        techStack: [
+          "ReactJS",
+          "Django REST Framework",
+          "PostgreSQL",
+          "Payment Gateway Integration",
+        ],
+        image: "/images/mrzzm.png",
       },
     ],
   },
@@ -190,6 +202,35 @@ export const industries = [
           "Comprehensive online grocery shopping and delivery services.",
         techStack: ["React Native", "Node.js", "MongoDB"],
         image: "/images/GroceryDeliveryApplication.png",
+      },
+      {
+        name: "Koalify.ai",
+        website: "https://koalabyte.ai/",
+        description:
+          "Recruiter platform offering AI-powered candidate sourcing, job matching, and hiring workflow management for companies.",
+        techStack: [
+          "ReactJS",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "Tailwind CSS",
+        ],
+        image: "/images/koalify.png",
+      },
+      {
+        name: "Time Tracker",
+        website: "https://bicsops-fe.azurewebsites.net/dashboard",
+        description:
+          "Time tracking platform with web dashboard and ElectronJS-based desktop app, designed to monitor productivity, log hours, and generate reports for teams.",
+        techStack: [
+          "ReactJS",
+          "ElectronJS",
+          "Node.js",
+          "Express.js",
+          "Azure SQL",
+          "Tailwind CSS",
+        ],
+        image: "/images/timeTracker.png",
       },
     ],
   },
