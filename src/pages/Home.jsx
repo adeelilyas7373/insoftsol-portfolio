@@ -1949,7 +1949,7 @@ const companyStats = [
   },
   {
     label: "Years Experience",
-    value: "8+",
+    value: "5+",
     icon: (
       <StatIcon>
         <span className="bg-gradient-to-br from-pink-50 to-pink-100 border border-pink-200/30">
@@ -2071,7 +2071,7 @@ const Home = () => {
               delay={fadeInVariants[0].delay}
               style={{ marginBottom: "1.2rem" }}
             >
-              <WelcomeBadge>Welcome to Logics Bay</WelcomeBadge>
+              <WelcomeBadge>Welcome to In-SoftSol</WelcomeBadge>  
             </FadeInElement>
 
             <FadeInElement delay={fadeInVariants[1].delay}>
@@ -2102,13 +2102,13 @@ const Home = () => {
         </Container>
       </HeroSection>
 
-      {/* About Logics Bay Section with Stats */}
+      {/* About In-SoftSol Section with Stats */}
       <AboutSection ref={aboutRef}>
         <Container>
           <SectionHeader>
             <FadeInElement delay={fadeInVariants[0].delay}>
               <SectionTitle>
-                <GradientText>About Logics Bay</GradientText>
+                <GradientText>About In-SoftSol</GradientText>
               </SectionTitle>
               <SectionDivider />
               <SectionSubtitle>

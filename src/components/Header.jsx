@@ -81,12 +81,12 @@ const Header = () => {
           >
             <img
               src={logo}
-              alt="Logics Bay"
+              alt="In-SoftSol"
               className="w-9 h-9 object-contain"
               style={{ minWidth: "2.25rem" }}
             />
             <span className="logo-text text-[1.35rem] font-bold tracking-tight select-none">
-              Logics Bay
+              In-SoftSol
             </span>
           </Link>
 

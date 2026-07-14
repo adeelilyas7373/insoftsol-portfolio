@@ -203,7 +203,7 @@ const Contact = () => {
 
     try {
       const response = await fetch(
-        "https://portfolio-backend-three-pi.vercel.app/api/contact",
+        "http://localhost:9000/api/contact",
         {
           method: "POST",
           headers: {
@@ -252,12 +252,12 @@ const Contact = () => {
                 <ContactItem
                   icon={<FiMail size={22} />}
                   title="Email"
-                  content="haseeb@logicsbay.com"
+                  content="insoftsol34@gmail.com"
                 />
                 <ContactItem
                   icon={<FiPhone size={22} />}
                   title="Phone"
-                  content="+92 314 4366017"
+                  content="+92 304 5226671"
                 />
                 <ContactItem
                   icon={<FiMapPin size={22} />}
@@ -279,9 +279,9 @@ const Contact = () => {
                         (e.currentTarget.style.color = "#334155")
                       }
                     >
-                      765-C, Street 16, Block C Faisal Town,
+                      955-C, Street 36, Block Block B Faisal Town,
                       <br />
-                      Lahore-54700 Punjab PAKISTAN
+                      Lahore-54000 Punjab PAKISTAN
                     </a>
                   }
                 />

@@ -152,7 +152,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-10">
           <div className={fadeInVariants[0]}>
             <h3 className="text-2xl font-extrabold mb-4 tracking-wide footer-brand-gradient footer-animate-fade-in-up italic">
-              Logics Bay
+              In-SoftSol
             </h3>
             <p className="text-indigo-100/90 font-medium footer-animate-fade-in-up delay-100">
               Delivering innovative digital solutions across industries with a
@@ -246,22 +246,22 @@ const Footer = () => {
             </h4>
             <address className="not-italic text-indigo-200/90 font-medium footer-animate-fade-in-up delay-100">
               <p className="footer-contact-gradient">
-                765-C, Street 16, Block C Faisal Town,
+                955-C, Street 36, Block Block B Faisal Town,
               </p>
               <p className="footer-contact-gradient">
-                Lahore-54700 Punjab PAKISTAN
+                Lahore-54000 Punjab PAKISTAN
               </p>
               <p className="mt-2 footer-contact-gradient">
-                haseeb@logicsbay.com
+              insoftsol34@gmail.com
               </p>
-              <p className="footer-contact-gradient">+92 314 4366017</p>
+              <p className="footer-contact-gradient">+92 304 5226671</p>
             </address>
           </div>
         </div>
 
         <div className="border-t border-indigo-400/30 mt-14 pt-8 text-center">
           <p className="footer-copyright footer-animate-fade-in-up delay-300">
-            &copy; {new Date().getFullYear()} Logics Bay. All rights reserved.
+            &copy; {new Date().getFullYear()} In-SoftSol. All rights reserved.
           </p>
         </div>
       </div>
